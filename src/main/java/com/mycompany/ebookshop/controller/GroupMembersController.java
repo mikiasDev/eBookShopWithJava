@@ -1,0 +1,12 @@
+package com.mycompany.ebookshop.controller;
+
+import com.mycompany.ebookshop.MainApp;
+import javafx.fxml.FXML;
+
+public class GroupMembersController {
+    
+    @FXML
+    private void handleBackToMain() {
+        MainApp.changeScene("main.fxml", "eBookShop - Main Store");
+    }
+}

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.RegisterController"
+            style="-fx-background: linear-gradient(to bottom, #003399, #000066, #000033);">
+    
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" 
+                    fitToHeight="true" maxHeight="700">
+            
+            <VBox alignment="CENTER" spacing="20" maxWidth="500" 
+                  style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 10);">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                
+                <!-- Header with Logo -->
+                <VBox alignment="CENTER" spacing="10">
+                    <ImageView fitWidth="80" fitHeight="80" preserveRatio="true">
+                        <Image url="@/com/mycompany/ebookshop/images/uog_logo.jpg" />
+                    </ImageView>
+                    <Label text="UNIVERSITY OF GONDAR" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
+                    <Label text="Create New Account" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
+                    <Label text="Please fill in the information below" style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+                </VBox>
+                
+                <!-- Registration Form -->
+                <VBox spacing="15" fillWidth="true">
+                    
+                    <!-- Full Name -->
+                    <VBox spacing="5">
+                        <Label text="Full Name *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <TextField fx:id="fullNameField" promptText="Enter your full name"
+                                  style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Username -->
+                    <VBox spacing="5">
+                        <Label text="Username *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <TextField fx:id="usernameField" promptText="Choose a username (letters, numbers, underscore)"
+                                  style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Email -->
+                    <VBox spacing="5">
+                        <Label text="Email *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <TextField fx:id="emailField" promptText="your@email.com"
+                                  style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Password -->
+                    <VBox spacing="5">
+                        <Label text="Password *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <PasswordField fx:id="passwordField" promptText="Create a password (min 4 characters)"
+                                       style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Confirm Password -->
+                    <VBox spacing="5">
+                        <Label text="Confirm Password *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password"
+                                       style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Address -->
+                    <VBox spacing="5">
+                        <Label text="Address" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <TextField fx:id="addressField" promptText="Your address (optional)"
+                                  style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Phone -->
+                    <VBox spacing="5">
+                        <Label text="Phone Number" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                        <TextField fx:id="phoneField" promptText="Your phone number (optional)"
+                                  style="-fx-pref-height: 40; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Error Label -->
+                    <Label fx:id="errorLabel" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" wrapText="true"/>
+                    
+                    <!-- Success Label -->
+                    <Label fx:id="successLabel" style="-fx-text-fill: #008000; -fx-font-size: 12px;" wrapText="true"/>
+                    
+                    <!-- Buttons -->
+                    <VBox spacing="10" fillWidth="true">
+                        <Button fx:id="registerButton" text="REGISTER" onAction="#handleRegister"
+                                style="-fx-background-color: #003399; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-pref-height: 45; -fx-background-radius: 10; -fx-cursor: hand;"/>
+                        
+                        <Button text="BACK TO LOGIN" onAction="#handleBackToLogin"
+                                style="-fx-background-color: transparent; -fx-text-fill: #003399; -fx-font-size: 14px; -fx-pref-height: 40; -fx-cursor: hand;"/>
+                    </VBox>
+                    
+                    <!-- Info Text -->
+                    <Label text="* Required fields" style="-fx-font-size: 10px; -fx-text-fill: #999999;"/>
+                </VBox>
+                
+                <!-- Footer -->
+                <Label text="© 2026 University of Gondar - Department of Computer Science" 
+                       style="-fx-font-size: 9px; -fx-text-fill: #999999;"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

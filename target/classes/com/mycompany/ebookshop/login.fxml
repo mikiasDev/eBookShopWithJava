@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.ebookshop.controller.LoginController"
+            style="-fx-background: linear-gradient(to bottom, #003399, #000066, #000033);">
+    
+    <center>
+        <VBox alignment="CENTER" spacing="25" maxWidth="450" 
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0, 0, 10);">
+            <padding>
+                <Insets top="45" right="45" bottom="45" left="45"/>
+            </padding>
+            
+            <!-- University of Gondar Logo -->
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fitWidth="90" fitHeight="90" preserveRatio="true">
+                    <Image url="@/com/mycompany/ebookshop/images/uog_logo.jpg" />
+                </ImageView>
+                <Label text="UNIVERSITY OF GONDAR" 
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
+                <Label text="HREC FRANCHE" 
+                       style="-fx-font-size: 11px; -fx-text-fill: #666666;"/>
+                <Label text="eBookShop" 
+                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
+                <Label text="Online Book Store System" 
+                       style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+            </VBox>
+            
+            <Separator style="-fx-background-color: #CCCCCC;"/>
+            
+            <!-- Login Form -->
+            <VBox spacing="15" fillWidth="true">
+                
+                <VBox spacing="5">
+                    <Label text="Username" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                    <TextField fx:id="usernameField" promptText="Enter your username"
+                              style="-fx-pref-height: 42; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                </VBox>
+                
+                <VBox spacing="5">
+                    <Label text="Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password"
+                                  style="-fx-pref-height: 42; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
+                </VBox>
+                
+                <Label fx:id="errorLabel" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" wrapText="true"/>
+                
+                <HBox spacing="15" alignment="CENTER">
+                    <Button fx:id="loginButton" text="LOGIN" onAction="#handleLogin"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: #003399; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-pref-height: 45; -fx-background-radius: 10; -fx-cursor: hand;"/>
+                    
+                    <Button fx:id="registerButton" text="CREATE ACCOUNT" onAction="#handleRegister"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: #003399; -fx-font-size: 13px; -fx-pref-height: 45; -fx-border-color: #003399; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+            
+            <Label text="© 2026 University of Gondar - Department of Computer Science" 
+                   style="-fx-font-size: 9px; -fx-text-fill: #999999;" wrapText="true" alignment="CENTER"/>
+        </VBox>
+    </center>
+</BorderPane>

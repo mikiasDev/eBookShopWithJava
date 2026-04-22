@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mycompany.ebookshop.controller.CheckoutController"
+      style="-fx-background-color: #f8f9fa;">
+    
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15 20;">
+        <Label text="💳 Checkout" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Back to Cart" onAction="#handleBackToCart"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+    
+    <HBox spacing="20" VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
+        <!-- Left Column - Shipping Info -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS">
+            <Label text="Shipping Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            
+            <TextField fx:id="fullNameField" promptText="Full Name"/>
+            <TextField fx:id="addressField" promptText="Address"/>
+            <TextField fx:id="phoneField" promptText="Phone Number"/>
+            <TextField fx:id="emailField" promptText="Email"/>
+        </VBox>
+        
+        <!-- Right Column - Payment Info -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS">
+            <Label text="Payment Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            
+            <ComboBox fx:id="paymentMethod" promptText="Payment Method"/>
+            <TextField fx:id="cardNumberField" promptText="Card Number"/>
+            <HBox spacing="10">
+                <TextField fx:id="expiryField" promptText="MM/YY" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="cvvField" promptText="CVV" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            
+            <Separator/>
+            
+            <VBox spacing="5" alignment="CENTER_RIGHT">
+                <Label text="Subtotal: "><graphic><Label fx:id="subtotalLabel"/></graphic></Label>
+                <Label text="Tax (8%): "><graphic><Label fx:id="taxLabel"/></graphic></Label>
+                <Label text="Total: " style="-fx-font-size: 20px; -fx-font-weight: bold;">
+                    <graphic><Label fx:id="totalLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/></graphic>
+                </Label>
+            </VBox>
+            
+            <Button text="Place Order" onAction="#handlePlaceOrder"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 12; -fx-cursor: hand;"/>
+        </VBox>
+    </HSpacer>
+</VBox>
