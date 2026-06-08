@@ -1,54 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
 
-<VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.mycompany.ebookshop.controller.CheckoutController"
-      style="-fx-background-color: #f8f9fa;">
-    
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15 20;">
-        <Label text="💳 Checkout" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button text="Back to Cart" onAction="#handleBackToCart"
-                style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-cursor: hand;"/>
-    </HBox>
-    
-    <HBox spacing="20" VBox.vgrow="ALWAYS" style="-fx-padding: 20;">
-        <!-- Left Column - Shipping Info -->
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <Label text="Shipping Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
-            
-            <TextField fx:id="fullNameField" promptText="Full Name"/>
-            <TextField fx:id="addressField" promptText="Address"/>
-            <TextField fx:id="phoneField" promptText="Phone Number"/>
-            <TextField fx:id="emailField" promptText="Email"/>
-        </VBox>
-        
-        <!-- Right Column - Payment Info -->
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <Label text="Payment Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
-            
-            <ComboBox fx:id="paymentMethod" promptText="Payment Method"/>
-            <TextField fx:id="cardNumberField" promptText="Card Number"/>
-            <HBox spacing="10">
-                <TextField fx:id="expiryField" promptText="MM/YY" HBox.hgrow="ALWAYS"/>
-                <TextField fx:id="cvvField" promptText="CVV" HBox.hgrow="ALWAYS"/>
-            </HBox>
-            
-            <Separator/>
-            
-            <VBox spacing="5" alignment="CENTER_RIGHT">
-                <Label text="Subtotal: "><graphic><Label fx:id="subtotalLabel"/></graphic></Label>
-                <Label text="Tax (8%): "><graphic><Label fx:id="taxLabel"/></graphic></Label>
-                <Label text="Total: " style="-fx-font-size: 20px; -fx-font-weight: bold;">
-                    <graphic><Label fx:id="totalLabel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #27ae60;"/></graphic>
-                </Label>
-            </VBox>
-            
-            <Button text="Place Order" onAction="#handlePlaceOrder"
-                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 12; -fx-cursor: hand;"/>
-        </VBox>
-    </HSpacer>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.CheckoutController"
+            prefHeight="760.0" prefWidth="1280.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eef6ff, #fbfdff);"
+            stylesheets="@css/style.css">
+    <children>
+        <ScrollPane fitToWidth="true" fitToHeight="true" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                    style="-fx-background-color: transparent; -fx-background: transparent;">
+            <content>
+                <VBox spacing="18.0" style="-fx-padding: 28;">
+                    <children>
+                        <VBox styleClass="page-header">
+                            <children>
+                                <Label text="Checkout" styleClass="page-title" />
+                                <Label text="Confirm customer details and complete the purchase" styleClass="page-subtitle" />
+                            </children>
+                        </VBox>
+
+                        <FlowPane hgap="18.0" vgap="18.0" prefWrapLength="980.0" styleClass="content-wrap">
+                            <children>
+                                <VBox spacing="14.0" styleClass="surface-card" minWidth="320.0" prefWidth="620.0">
+                                    <children>
+                                        <Label text="Customer Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                        <GridPane hgap="18.0" vgap="12.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints minWidth="150.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                                <RowConstraints minHeight="40.0" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Full Name" style="-fx-font-weight: bold;" />
+                                                <TextField fx:id="fullNameField" GridPane.columnIndex="1" promptText="Enter full name" />
+
+                                                <Label text="Email" style="-fx-font-weight: bold;" GridPane.rowIndex="1" />
+                                                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Enter email" />
+
+                                                <Label text="Phone" style="-fx-font-weight: bold;" GridPane.rowIndex="2" />
+                                                <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Enter phone" />
+
+                                                <Label text="Delivery Address" style="-fx-font-weight: bold;" GridPane.rowIndex="3" />
+                                                <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Enter shipping address" />
+
+                                                <Label text="Payment Method" style="-fx-font-weight: bold;" GridPane.rowIndex="4" />
+                                                <ComboBox fx:id="paymentMethod" GridPane.columnIndex="1" GridPane.rowIndex="4" prefHeight="38.0" promptText="Select Payment" />
+
+                                                <Label text="Card Number" style="-fx-font-weight: bold;" GridPane.rowIndex="5" />
+                                                <TextField fx:id="cardNumberField" GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="XXXX XXXX XXXX XXXX" />
+
+                                                <Label text="Expiry (MM/YY)" style="-fx-font-weight: bold;" GridPane.rowIndex="6" />
+                                                <TextField fx:id="expiryField" GridPane.columnIndex="1" GridPane.rowIndex="6" promptText="MM/YY" />
+
+                                                <Label text="CVV" style="-fx-font-weight: bold;" GridPane.rowIndex="7" />
+                                                <TextField fx:id="cvvField" GridPane.columnIndex="1" GridPane.rowIndex="7" promptText="CVV" />
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="14.0" minWidth="300.0" prefWidth="340.0" styleClass="surface-card">
+                                    <children>
+                                        <Label text="Order Summary" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                        <VBox spacing="10.0" style="-fx-padding: 4 0 0 0;">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <children>
+                                                        <Label text="Subtotal" style="-fx-text-fill: #6b7c93;" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label fx:id="subtotalLabel" text="\$0.00" style="-fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <children>
+                                                        <Label text="Tax" style="-fx-text-fill: #6b7c93;" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label fx:id="taxLabel" text="\$0.00" style="-fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <children>
+                                                        <Label text="Total" style="-fx-text-fill: #6b7c93;" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label fx:id="totalLabel" text="\$0.00" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2d8cff;" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                        <Separator />
+
+                                        <Button onAction="#handlePlaceOrder" prefHeight="50.0" maxWidth="Infinity"
+                                                style="-fx-background-color: #1fbf75; -fx-text-fill: white; -fx-background-radius: 14; -fx-font-weight: bold; -fx-font-size: 16; -fx-cursor: hand;"
+                                                text="Confirm Purchase" />
+                                        <Button onAction="#handleBack" prefHeight="44.0" maxWidth="Infinity"
+                                                style="-fx-background-color: transparent; -fx-text-fill: #2d8cff; -fx-border-color: #2d8cff; -fx-border-radius: 14; -fx-border-width: 1.5; -fx-background-radius: 14; -fx-cursor: hand;"
+                                                text="Back to Cart" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </FlowPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

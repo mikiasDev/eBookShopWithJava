@@ -1,76 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" 
-            xmlns:fx="http://javafx.com/fxml/1" 
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.mycompany.ebookshop.controller.LoginController"
-            style="-fx-background: linear-gradient(to bottom, #003399, #000066, #000033);">
-    
+            stylesheets="@css/style.css" styleClass="root-pane">
+
     <center>
-        <VBox alignment="CENTER" spacing="25" maxWidth="450" 
-              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0, 0, 10);">
-            <padding>
-                <Insets top="45" right="45" bottom="45" left="45"/>
-            </padding>
-            
-            <!-- University of Gondar Logo -->
-            <VBox alignment="CENTER" spacing="10">
-                <ImageView fitWidth="90" fitHeight="90" preserveRatio="true">
-                    <Image url="@/com/mycompany/ebookshop/images/uog_logo.jpg" />
-                </ImageView>
-                <Label text="UNIVERSITY OF GONDAR" 
-                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
-                <Label text="HREC FRANCHE" 
-                       style="-fx-font-size: 11px; -fx-text-fill: #666666;"/>
-                <Label text="eBookShop" 
-                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #003399;"/>
-                <Label text="Online Book Store System" 
-                       style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
-            </VBox>
-            
-            <Separator style="-fx-background-color: #CCCCCC;"/>
-            
-            <!-- Login Form -->
-            <VBox spacing="15" fillWidth="true">
-                
-                <VBox spacing="5">
-                    <Label text="Username" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
-                    <TextField fx:id="usernameField" promptText="Enter your username"
-                              style="-fx-pref-height: 42; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
-                </VBox>
-                
-                <VBox spacing="5">
-                    <Label text="Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
-                    <PasswordField fx:id="passwordField" promptText="Enter your password"
-                                  style="-fx-pref-height: 42; -fx-padding: 0 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CCCCCC; -fx-border-width: 1;"/>
-                </VBox>
-                
-                <Label fx:id="errorLabel" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" wrapText="true"/>
-                
-                <HBox spacing="15" alignment="CENTER">
-                    <Button fx:id="loginButton" text="LOGIN" onAction="#handleLogin"
-                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                            style="-fx-background-color: #003399; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-pref-height: 45; -fx-background-radius: 10; -fx-cursor: hand;"/>
-                    
-                    <Button fx:id="registerButton" text="CREATE ACCOUNT" onAction="#handleRegister"
-                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: #003399; -fx-font-size: 13px; -fx-pref-height: 45; -fx-border-color: #003399; -fx-border-radius: 10; -fx-border-width: 1.5; -fx-cursor: hand;"/>
-                </HBox>
-            </VBox>
-            
-            <Label text="© 2026 University of Gondar - Department of Computer Science" 
-                   style="-fx-font-size: 9px; -fx-text-fill: #999999;" wrapText="true" alignment="CENTER"/>
-        </VBox>
+        <StackPane alignment="CENTER">
+            <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="form-scroll-pane">
+                <content>
+                    <StackPane alignment="CENTER">
+                        <VBox fx:id="cardContainer" alignment="CENTER" spacing="16" styleClass="floating-card" maxWidth="520" prefWidth="520">
+                            <padding>
+                                <Insets top="28" right="28" bottom="28" left="28" />
+                            </padding>
+
+                            <!-- Logo -->
+                            <VBox alignment="CENTER" spacing="6">
+                                <ImageView fitHeight="64" preserveRatio="true">
+                                    <Image url="@images/uog_logo.jpg" />
+                                </ImageView>
+                                <Text text="eBookShop" styleClass="brand-logo" />
+                                <Text text="University of Gondar" styleClass="brand-subtitle" />
+                            </VBox>
+
+                            <!-- Form Title -->
+                            <VBox alignment="CENTER_LEFT" spacing="6" prefWidth="440">
+                                <Text text="Welcome back" styleClass="form-title" />
+                                <Text text="Sign in to continue to your library" styleClass="brand-subtitle" />
+                            </VBox>
+
+                            <!-- Inputs -->
+                            <VBox spacing="12" prefWidth="440">
+                                <VBox spacing="6">
+                                    <Label text="Username or Email" styleClass="field-label" />
+                                    <HBox spacing="8" alignment="CENTER_LEFT">
+                                        <TextField fx:id="usernameField" promptText="you@example.com" prefHeight="44" HBox.hgrow="ALWAYS" styleClass="transparent-field" />
+                                    </HBox>
+                                </VBox>
+
+                                <VBox spacing="6">
+                                    <Label text="Password" styleClass="field-label" />
+                                    <HBox spacing="8" alignment="CENTER_LEFT">
+                                        <PasswordField fx:id="passwordField" promptText="Password" prefHeight="44" HBox.hgrow="ALWAYS" styleClass="transparent-field" />
+                                        <TextField fx:id="passwordTextField" visible="false" managed="false" promptText="Password" prefHeight="44" HBox.hgrow="ALWAYS" styleClass="transparent-field" />
+                                        <Button fx:id="togglePasswordBtn" onAction="#handleTogglePassword" styleClass="icon-button">
+                                            <graphic>
+                                                <Text fx:id="eyeIcon" text="👁" />
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Hyperlink fx:id="forgotPasswordLink" text="Forgot password?" onAction="#handleForgotPassword" styleClass="blue-link" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                </HBox>
+
+                                <!-- Error Container -->
+                                <HBox fx:id="errorContainer" spacing="8" visible="false" managed="false">
+                                    <Label fx:id="errorIcon" text="⚠" styleClass="error-text" />
+                                    <Label fx:id="errorMsg" text="Invalid credentials" styleClass="error-text" />
+                                </HBox>
+
+                            </VBox>
+
+                            <!-- Actions -->
+                            <VBox spacing="10" prefWidth="440">
+                                <Button fx:id="loginButton" text="Sign In" onAction="#handleLogin" styleClass="primary-button" prefHeight="44">
+                                    <graphic>
+                                        <ProgressIndicator fx:id="loadingSpinner" visible="false" managed="false" prefWidth="18" prefHeight="18" progress="-1.0" />
+                                    </graphic>
+                                </Button>
+
+                                <HBox spacing="8" alignment="CENTER">
+                                    <Separator HBox.hgrow="ALWAYS" />
+                                    <Label text="or" styleClass="divider-text" />
+                                    <Separator HBox.hgrow="ALWAYS" />
+                                </HBox>
+
+                                <Button fx:id="googleSignInButton" text="Continue with Google" onAction="#handleGoogleSignIn" styleClass="google-button" prefHeight="44" />
+                            </VBox>
+
+                            <!-- Footer -->
+                            <HBox alignment="CENTER" spacing="6">
+                                <Label text="Don't have an account?" />
+                                <Hyperlink fx:id="registerLink" text="Create one" onAction="#handleNavigateToRegister" styleClass="blue-link" />
+                            </HBox>
+                        </VBox>
+                    </StackPane>
+                </content>
+            </ScrollPane>
+        </StackPane>
     </center>
+
 </BorderPane>

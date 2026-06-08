@@ -1,97 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.mycompany.ebookshop.controller.MainController">
-    
-    <!-- Menu Bar -->
-    <MenuBar>
-        <Menu text="File">
-            <MenuItem text="Refresh" onAction="#handleRefresh"/>
-            <SeparatorMenuItem/>
-            <MenuItem text="Logout" onAction="#handleLogout"/>
-            <MenuItem text="Exit" onAction="#handleExit"/>
-        </Menu>
-        <Menu text="Shop">
-            <MenuItem text="Browse Books" onAction="#handleRefresh"/>
-            <MenuItem text="View Cart" onAction="#handleViewCart"/>
-            <MenuItem text="Checkout" onAction="#handleCheckout"/>
-        </Menu>
-        <Menu text="Account">
-            <MenuItem text="My Profile" onAction="#handleProfile"/>
-            <MenuItem text="Order History" onAction="#handleOrderHistory"/>
-            <SeparatorMenuItem/>
-            <MenuItem text="Change Password" onAction="#handleChangePassword"/>
-        </Menu>
-        <Menu text="Help">
-            <MenuItem text="About" onAction="#handleAbout"/>
-            <MenuItem text="Group Members" onAction="#handleGroupMembers"/>
-        </Menu>
-    </MenuBar>
-    
-    <!-- Rest of your existing main.fxml content -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15 20;">
-        <Label text="📚 eBookShop" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Label fx:id="welcomeLabel" style="-fx-text-fill: white;"/>
-        <HBox onMouseClicked="#handleViewCart" style="-fx-cursor: hand;">
-            <Label text="🛒 " style="-fx-font-size: 18px;"/>
-            <Label fx:id="cartCountLabel" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
-        </HBox>
-    </HBox>
-    
-    <!-- Rest of your existing content... -->
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.MainController"
+            prefHeight="760.0" prefWidth="1280.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eef6ff, #fbfdff);"
+            stylesheets="@css/style.css">
+    <children>
+        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="18.0" styleClass="top-navbar" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <children>
+                                <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true">
+                                    <image><Image url="@images/uog_logo.jpg" /></image>
+                                </ImageView>
+                                <VBox spacing="2.0">
+                                    <children>
+                                        <Label text="eBookShop" styleClass="top-nav-brand" />
+                                        <Label text="Digital Bookstore" styleClass="top-nav-subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.ebookshop.controller.MainController">
-    
-    <top>
-        <VBox>
-            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15 20;">
-                <Label text="📚 eBookShop" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="welcomeLabel" style="-fx-text-fill: white;"/>
-                <Button text="Logout" onAction="#handleLogout" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
-            </HBox>
-            
-            <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #ecf0f1; -fx-padding: 10 20;">
-                <TextField fx:id="searchField" promptText="🔍 Search books..." HBox.hgrow="ALWAYS" 
-                          style="-fx-pref-height: 35; -fx-padding: 0 15; -fx-background-radius: 20;"/>
-                <ComboBox fx:id="categoryFilter" style="-fx-pref-width: 150; -fx-pref-height: 35;"/>
-                <Button text="🔄 Refresh" onAction="#handleRefresh" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;"/>
-                <HBox onMouseClicked="#handleViewCart" style="-fx-cursor: hand;">
-                    <Label text="🛒 " style="-fx-font-size: 18px;"/>
-                    <Label fx:id="cartCountLabel" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                        <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="12.0" styleClass="top-search-shell">
+                            <children>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS" styleClass="top-control-group">
+                                    <children>
+                                        <Label text="Search books" styleClass="top-control-label" />
+                                        <TextField fx:id="searchField" onKeyReleased="#handleSearch" promptText="Search by title or author..." styleClass="top-control-field" prefWidth="360.0" />
+                                    </children>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="top-control-group">
+                                    <children>
+                                        <Label text="Category" styleClass="top-control-label" />
+                                        <ComboBox fx:id="categoryComboBox" onAction="#handleCategorySelect" promptText="All Categories" prefWidth="190.0" styleClass="top-control-field" />
+                                    </children>
+                                </VBox>
+                                <Button fx:id="clearFilterBtn" onAction="#handleDashboard" text="Clear Filters" visible="false" styleClass="top-nav-button top-nav-button-ghost" />
+                                <Button fx:id="cartButton" onAction="#handleViewCart" text="🛒 Cart" styleClass="top-nav-button top-nav-button-cart" />
+                            </children>
+                        </HBox>
+                    </children>
                 </HBox>
-            </HBox>
-        </VBox>
-    </top>
-    
-    <center>
-        <TableView fx:id="bookTable" style="-fx-background-color: white;">
-            <columns>
-                <TableColumn fx:id="colTitle" text="Title" prefWidth="250"/>
-                <TableColumn fx:id="colAuthor" text="Author" prefWidth="200"/>
-                <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
-                <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
-                <TableColumn fx:id="colCategory" text="Category" prefWidth="120"/>
-            </columns>
-            <placeholder>
-                <Label text="No books available" style="-fx-padding: 20;"/>
-            </placeholder>
-        </TableView>
-    </center>
-    
-    <bottom>
-        <HBox alignment="CENTER" spacing="15" style="-fx-padding: 15; -fx-background-color: #ecf0f1;">
-            <Button text="➕ Add to Cart" onAction="#handleAddToCart" 
-                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;"/>
-            <Button text="🛒 View Cart" onAction="#handleViewCart"
-                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-cursor: hand;"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+            </top>
+
+            <left>
+                <VBox prefWidth="210.0" alignment="TOP_LEFT" styleClass="admin-sidebar admin-sidebar-compact" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox spacing="8.0" style="-fx-padding: 8 12 12 12;">
+                            <children>
+                                <Button onAction="#handleDashboard" text="Library" maxWidth="Infinity" styleClass="sidebar-button-active" />
+                                <Button onAction="#handleViewCart" text="My Cart" maxWidth="Infinity" styleClass="sidebar-button" />
+                                <Button onAction="#handleGroupMembers" text="Group Members" maxWidth="Infinity" styleClass="sidebar-button" />
+                                <Button onAction="#handleProfile" text="My Profile" maxWidth="Infinity" styleClass="sidebar-button" />
+                                <Button onAction="#handleViewOrders" text="My Orders" maxWidth="Infinity" styleClass="sidebar-button" />
+                            </children>
+                        </VBox>
+
+                        <VBox VBox.vgrow="ALWAYS" />
+
+                        <VBox spacing="10.0" style="-fx-padding: 0 16 18 16;">
+                            <children>
+                                <Button onAction="#handleLogout" text="Sign Out" maxWidth="Infinity" styleClass="signout-button" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+
+            <center>
+                <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                    <content>
+                        <VBox spacing="10.0" style="-fx-padding: 8 20 16 20;">
+                            <children>
+                                <VBox spacing="14.0" styleClass="surface-card shelf-surface" prefHeight="560.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Label fx:id="sectionTitleLabel" text="Library Shelf" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                <Label text="Live catalog cards" style="-fx-text-fill: #6b7c93;" />
+                                            </children>
+                                        </HBox>
+                                        <ScrollPane fx:id="booksScrollPane" fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                                            <content>
+                                                <GridPane fx:id="booksGrid" hgap="22.0" vgap="22.0" style="-fx-padding: 4;" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
+
+

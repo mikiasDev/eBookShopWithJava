@@ -1,65 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.mycompany.ebookshop.controller.AdminController">
-    
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15 20;">
-            <Label text="👑 Admin Panel - eBookShop" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Logout" onAction="#handleLogout" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
-        </HBox>
-    </top>
-    
-    <center>
-        <SplitPane dividerPositions="0.6" style="-fx-background-color: #ecf0f1;">
-            <!-- Left: Book List -->
-            <TableView fx:id="bookTable">
-                <columns>
-                    <TableColumn fx:id="colTitle" text="Title" prefWidth="200"/>
-                    <TableColumn fx:id="colAuthor" text="Author" prefWidth="150"/>
-                    <TableColumn fx:id="colPrice" text="Price" prefWidth="80"/>
-                    <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
-                    <TableColumn fx:id="colCategory" text="Category" prefWidth="100"/>
-                </columns>
-            </TableView>
-            
-            <!-- Right: Book Form -->
-            <ScrollPane>
-                <GridPane hgap="15" vgap="15" style="-fx-padding: 20;">
-                    <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <TextField fx:id="titleField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
-                    
-                    <Label text="Author:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <TextField fx:id="authorField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                    
-                    <Label text="ISBN:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <TextField fx:id="isbnField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                    
-                    <Label text="Price:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                    <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-                    
-                    <Label text="Stock:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                    <TextField fx:id="stockField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-                    
-                    <Label text="Category:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                    <ComboBox fx:id="categoryBox" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-                    
-                    <Label text="Description:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                    <TextArea fx:id="descriptionArea" GridPane.rowIndex="6" GridPane.columnIndex="1" prefHeight="100"/>
-                    
-                    <HBox spacing="10" GridPane.rowIndex="7" GridPane.columnIndex="1">
-                        <Button text="Add Book" onAction="#handleAddBook" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
-                        <Button text="Update" onAction="#handleUpdateBook" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;"/>
-                        <Button text="Delete" onAction="#handleDeleteBook" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
-                        <Button text="Clear" onAction="#handleClearForm" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;"/>
-                    </HBox>
-                </GridPane>
-            </ScrollPane>
-        </SplitPane>
-    </center>
-</BorderPane>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.AdminController"
+            prefHeight="760.0" prefWidth="1280.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eaf3ff, #f8fbff);"
+            stylesheets="@css/style.css">
+    <children>
+        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <left>
+                <VBox prefWidth="220.0" alignment="TOP_LEFT" styleClass="admin-sidebar" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox spacing="8.0" VBox.vgrow="ALWAYS" style="-fx-padding: 18 0;">
+                            <children>
+                                    <Button fx:id="menuBtn" id="menuBtn" onAction="#switchForm" maxWidth="Infinity" text="Catalog" styleClass="sidebar-button-active" />
+                                    <Button fx:id="dashboardBtn" id="dashboardBtn" onAction="#switchForm" maxWidth="Infinity" text="Book Dashboard" styleClass="sidebar-button" />
+                                <Button fx:id="inventoryBtn" id="inventoryBtn" onAction="#switchForm" maxWidth="Infinity" text="Book Inventory" styleClass="sidebar-button" />
+                                <Button fx:id="customersBtn" id="customersBtn" onAction="#switchForm" maxWidth="Infinity" text="Readers" styleClass="sidebar-button" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0" style="-fx-padding: 0 18 18 18;">
+                            <children>
+                                <Button onAction="#handleLogout" text="Logout" maxWidth="Infinity" styleClass="signout-button" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+
+            <center>
+                <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                    <content>
+                        <StackPane style="-fx-padding: 28;">
+                            <children>
+                                <AnchorPane fx:id="dashboard_form" visible="true" managed="true">
+                                    <children>
+                                        <VBox spacing="18.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                            <children>
+                                                <VBox spacing="6.0">
+                                                    <children>
+                                                        <Label text="Book Dashboard" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                        <Label text="Book sales overview and live reporting" style="-fx-font-size: 13px; -fx-text-fill: #6b7c93;" />
+                                                    </children>
+                                                </VBox>
+
+                                                <FlowPane hgap="16.0" vgap="16.0" prefWrapLength="980.0" styleClass="content-wrap">
+                                                    <children>
+                                                        <VBox styleClass="card-1" spacing="6.0" alignment="CENTER_LEFT" style="-fx-padding: 20;" minWidth="220.0" prefWidth="230.0">
+                                                            <children>
+                                                                <Label text="Registered Readers" textFill="WHITE" />
+                                                                <Label fx:id="dashboard_NC" text="0" textFill="WHITE">
+                                                                    <font><Font name="System Bold" size="30.0" /></font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox styleClass="card-2" spacing="6.0" alignment="CENTER_LEFT" style="-fx-padding: 20;" minWidth="220.0" prefWidth="230.0">
+                                                            <children>
+                                                                <Label text="Today's Sales" textFill="WHITE" />
+                                                                <Label fx:id="dashboard_TI" text="\$0.00" textFill="WHITE">
+                                                                    <font><Font name="System Bold" size="30.0" /></font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox styleClass="card-3" spacing="6.0" alignment="CENTER_LEFT" style="-fx-padding: 20;" minWidth="220.0" prefWidth="230.0">
+                                                            <children>
+                                                                <Label text="Total Revenue" textFill="WHITE" />
+                                                                <Label fx:id="dashboard_TotalI" text="\$0.00" textFill="WHITE">
+                                                                    <font><Font name="System Bold" size="30.0" /></font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox styleClass="card-4" spacing="6.0" alignment="CENTER_LEFT" style="-fx-padding: 20;" minWidth="220.0" prefWidth="230.0">
+                                                            <children>
+                                                                <Label text="Books Sold" textFill="WHITE" />
+                                                                <Label fx:id="dashboard_NSP" text="0" textFill="WHITE">
+                                                                    <font><Font name="System Bold" size="30.0" /></font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </FlowPane>
+
+                                                <FlowPane hgap="16.0" vgap="16.0" prefWrapLength="980.0" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <VBox spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(24,59,86,0.08), 18, 0, 0, 8);" minWidth="320.0" prefWidth="460.0">
+                                                            <children>
+                                                                <Label text="Sales Trend" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                                <AreaChart fx:id="incomeChart" legendVisible="false" prefHeight="330.0">
+                                                                    <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                                                    <yAxis><NumberAxis side="LEFT" /></yAxis>
+                                                                </AreaChart>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(24,59,86,0.08), 18, 0, 0, 8);" minWidth="320.0" prefWidth="460.0">
+                                                            <children>
+                                                                <Label text="Reader Activity" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                                <BarChart fx:id="customerChart" legendVisible="false" prefHeight="330.0">
+                                                                    <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                                                    <yAxis><NumberAxis side="LEFT" /></yAxis>
+                                                                </BarChart>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </FlowPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+
+                                <AnchorPane fx:id="menu_form" visible="false" managed="false">
+                                    <children>
+                                        <VBox spacing="14.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="18.0" styleClass="top-navbar catalog-topbar">
+                                                    <children>
+                                                        <VBox spacing="2.0">
+                                                            <children>
+                                                                <Label text="Book Catalog" styleClass="top-nav-brand" />
+                                                                <Label text="Browse the live eBookShop catalog by title, author, or category" styleClass="top-nav-subtitle" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="12.0" styleClass="top-search-shell">
+                                                            <children>
+                                                                <VBox spacing="4.0" HBox.hgrow="ALWAYS" styleClass="top-control-group">
+                                                                    <children>
+                                                                        <Label text="Search books" styleClass="top-control-label" />
+                                                                        <TextField fx:id="inventorySearchField" onKeyReleased="#handleInventorySearch" promptText="Search by title or author" styleClass="top-control-field catalog-search" prefWidth="360.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                                <VBox spacing="4.0" styleClass="top-control-group">
+                                                                    <children>
+                                                                        <Label text="Category" styleClass="top-control-label" />
+                                                                        <ComboBox fx:id="inventoryCategoryComboBox" onAction="#handleInventoryCategorySelect" promptText="All Categories" prefWidth="190.0" styleClass="top-control-field catalog-category" />
+                                                                    </children>
+                                                                </VBox>
+                                                                <Button fx:id="inventoryClearFilterBtn" onAction="#handleInventoryClearFilters" text="Clear Filters" styleClass="top-nav-button top-nav-button-ghost" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <VBox spacing="14.0" styleClass="surface-card catalog-panel">
+                                                    <children>
+                                                        <Label fx:id="inventorySectionTitle" text="Browse the catalog" styleClass="catalog-panel-title" />
+
+                                                        <ScrollPane fx:id="inventoryBooksScrollPane" fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="catalog-scroll">
+                                                            <content>
+                                                                <FlowPane fx:id="inventoryBooksGrid" hgap="18.0" vgap="18.0" prefWrapLength="774.0" styleClass="catalog-grid" />
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+
+                                <AnchorPane fx:id="inventory_form" visible="false" managed="false">
+                                    <children>
+                                        <VBox spacing="12.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                                            <children>
+                                                <VBox style="-fx-background-color: white; -fx-border-color: #7ba7bd; -fx-border-width: 1; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 10;" VBox.vgrow="ALWAYS">
+                                                    <children>
+                                                        <TableView fx:id="bookTable" VBox.vgrow="ALWAYS" style="-fx-background-color: #f5f8fa;">
+                                                            <columns>
+                                                                <TableColumn fx:id="colIsbn" text="ISBN" prefWidth="150" />
+                                                                <TableColumn fx:id="colTitle" text="Title" prefWidth="220" />
+                                                                <TableColumn fx:id="colCategory" text="Category" prefWidth="130" />
+                                                                <TableColumn fx:id="colPrice" text="Price" prefWidth="110" />
+                                                                <TableColumn fx:id="colAuthor" text="Author" prefWidth="140" />
+                                                            </columns>
+                                                            <columnResizePolicy>
+                                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                            </columnResizePolicy>
+                                                        </TableView>
+                                                    </children>
+                                                </VBox>
+
+                                                <VBox style="-fx-background-color: white; -fx-border-color: #d5d9dd; -fx-border-width: 1; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 12;" spacing="14.0">
+                                                    <children>
+                                                        <HBox spacing="18.0" alignment="TOP_LEFT">
+                                                            <children>
+                                                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                                                    <children>
+                                                                        <HBox spacing="14.0" alignment="TOP_LEFT">
+                                                                            <children>
+                                                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                                    <children>
+                                                                                        <Label text="ISBN" />
+                                                                                        <TextField fx:id="isbnField" promptText="ISBN" prefWidth="190.0" />
+                                                                                    </children>
+                                                                                </VBox>
+
+                                                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                                    <children>
+                                                                                        <Label text="Title" />
+                                                                                        <TextField fx:id="titleField" promptText="Title" prefWidth="190.0" />
+                                                                                    </children>
+                                                                                </VBox>
+                                                                            </children>
+                                                                        </HBox>
+
+                                                                        <HBox spacing="14.0" alignment="TOP_LEFT">
+                                                                            <children>
+                                                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                                    <children>
+                                                                                        <Label text="Category" />
+                                                                                        <ComboBox fx:id="categoryBox" promptText="Category" prefWidth="190.0" />
+                                                                                    </children>
+                                                                                </VBox>
+                                                                            </children>
+                                                                        </HBox>
+
+                                                                        <HBox spacing="14.0" alignment="TOP_LEFT">
+                                                                            <children>
+                                                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                                    <children>
+                                                                                        <Label text="Price" />
+                                                                                        <TextField fx:id="priceField" promptText="Price" prefWidth="190.0" />
+                                                                                    </children>
+                                                                                </VBox>
+
+                                                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                                    <children>
+                                                                                        <Label text="Author" />
+                                                                                        <TextField fx:id="authorField" promptText="Author" prefWidth="190.0" />
+                                                                                    </children>
+                                                                                </VBox>
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </VBox>
+
+                                                                <VBox spacing="10.0" alignment="TOP_CENTER" prefWidth="140.0">
+                                                                    <children>
+                                                                        <Label text="Cover Image" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #385168;" />
+                                                                        <StackPane prefWidth="120.0" prefHeight="120.0" style="-fx-border-color: #cfd6dc; -fx-border-width: 1; -fx-background-color: #f7f9fb;">
+                                                                            <children>
+                                                                                <ImageView fx:id="bookImageView" fitHeight="110.0" fitWidth="110.0" preserveRatio="true" />
+                                                                            </children>
+                                                                        </StackPane>
+                                                                        <Button text="Import Image" onAction="#handleImportImage" minWidth="90.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+
+                                                        <HBox spacing="14.0" alignment="CENTER_LEFT">
+                                                            <children>
+                                                                <Button text="Add Book" onAction="#handleAddBook" minWidth="86.0" styleClass="sidebar-button-active" />
+                                                                <Button text="Update Book" onAction="#handleUpdateBook" minWidth="86.0" />
+                                                                <Button text="Clear Form" onAction="#handleClearForm" minWidth="86.0" />
+                                                                <Button text="Delete Book" onAction="#handleDeleteBook" minWidth="86.0" />
+                                                                <TextField fx:id="imageUrlField" visible="false" managed="false" />
+                                                                <Label fx:id="imagePathLabel" visible="false" managed="false" />
+                                                                <TextArea fx:id="batchImageUrlArea" visible="false" managed="false" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+
+                                <AnchorPane fx:id="customers_form" visible="false" managed="false">
+                                    <children>
+                                        <VBox spacing="18.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                                            <children>
+                                                <VBox spacing="6.0">
+                                                    <children>
+                                                        <Label text="Readers" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                        <Label text="Registered reader accounts and activity" style="-fx-font-size: 13px; -fx-text-fill: #6b7c93;" />
+                                                    </children>
+                                                </VBox>
+                                                <TableView fx:id="customerTable" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(three-pass-box, rgba(24,59,86,0.08), 18, 0, 0, 8);">
+                                                    <columns>
+                                                        <TableColumn fx:id="colCustId" text="Reader ID" prefWidth="90" />
+                                                        <TableColumn fx:id="colCustName" text="Reader Name" prefWidth="320" />
+                                                        <TableColumn fx:id="colCustEmail" text="Email" prefWidth="420" />
+                                                    </columns>
+                                                    <columnResizePolicy>
+                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                    </columnResizePolicy>
+                                                </TableView>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </StackPane>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

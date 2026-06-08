@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 public class GroupMembersController {
     
     @FXML
-    private void handleBackToMain() {
+    public void handleBackToMain() {
         MainApp.changeScene("main.fxml", "eBookShop - Main Store");
     }
 }

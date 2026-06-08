@@ -15,6 +15,14 @@ public class AlertUtils {
         alert.showAndWait();
     }
     
+    public static void showSuccess(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success!");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
     public static void showWarning(String message) {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Warning");

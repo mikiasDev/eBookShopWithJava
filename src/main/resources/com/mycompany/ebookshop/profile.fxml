@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.ProfileController"
+            prefHeight="760.0" prefWidth="1280.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eef6ff, #fbfdff);"
+            stylesheets="@css/style.css">
+    <children>
+        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="14.0" style="-fx-padding: 18 26 14 26; -fx-background-color: rgba(255,255,255,0.75); -fx-border-color: rgba(24,59,86,0.08); -fx-border-width: 0 0 1 0;">
+                    <children>
+                        <VBox spacing="2.0">
+                            <children>
+                                <Label fx:id="titleLabel" text="My Profile" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                <Label fx:id="subtitleLabel" text="Update your username, display name, and password." style="-fx-font-size: 13px; -fx-text-fill: #61758b;" />
+                            </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="backButton" onAction="#handleBack" text="Back" styleClass="top-nav-button top-nav-button-ghost" />
+                    </children>
+                </HBox>
+            </top>
+
+            <center>
+                <VBox alignment="CENTER" spacing="18.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox maxWidth="760.0" spacing="18.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 22; -fx-border-radius: 22; -fx-border-color: rgba(24,59,86,0.08); -fx-padding: 28; -fx-effect: dropshadow(gaussian, rgba(13,37,63,0.10), 24, 0.12, 0, 8);">
+                            <children>
+                                <Label text="Account Details" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                <Label text="Google users can set a local password here and change their display name." style="-fx-font-size: 13px; -fx-text-fill: #61758b;" wrapText="true" />
+
+                                <Separator />
+
+                                <VBox spacing="14.0">
+                                    <children>
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label text="Username" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                <TextField fx:id="usernameField" promptText="Username" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d9e3ef; -fx-padding: 10 12;" />
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label text="Full Name" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                <TextField fx:id="fullNameField" promptText="Full name" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d9e3ef; -fx-padding: 10 12;" />
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label text="Email" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                <TextField fx:id="emailField" editable="false" focusTraversable="false" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d9e3ef; -fx-background-color: #f5f8fc; -fx-padding: 10 12; -fx-text-fill: #61758b;" />
+                                            </children>
+                                        </VBox>
+
+                                        <HBox spacing="16.0">
+                                            <children>
+                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="New Password" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                        <PasswordField fx:id="passwordField" promptText="Leave blank to keep current password" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d9e3ef; -fx-padding: 10 12;" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Confirm Password" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                        <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #d9e3ef; -fx-padding: 10 12;" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <Label fx:id="statusLabel" text="" style="-fx-font-size: 13px; -fx-text-fill: #6b7c93;" />
+
+                                <HBox alignment="CENTER_RIGHT" spacing="12.0">
+                                    <children>
+                                        <Button onAction="#handleBack" text="Cancel" styleClass="top-nav-button top-nav-button-ghost" />
+                                        <Button onAction="#handleSave" text="Save Changes" styleClass="top-nav-button top-nav-button-cart" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

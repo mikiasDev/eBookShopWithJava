@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.ebookshop.controller.AdminController"
+            prefHeight="760.0" prefWidth="1280.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eef6ff, #fbfdff);"
+            stylesheets="@css/style.css">
+    <children>
+        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="18.0" styleClass="top-navbar" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                            <children>
+                                <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true">
+                                    <image><Image url="@images/uog_logo.jpg" /></image>
+                                </ImageView>
+                                <VBox spacing="2.0">
+                                    <children>
+                                        <Label text="eBookShop" styleClass="top-nav-brand" />
+                                        <Label text="Book Catalog" styleClass="top-nav-subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="12.0" styleClass="top-search-shell">
+                            <children>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS" styleClass="top-control-group">
+                                    <children>
+                                        <Label text="Search books" styleClass="top-control-label" />
+                                        <TextField fx:id="inventorySearchField" onKeyReleased="#handleInventorySearch" promptText="Search by title or author..." styleClass="top-control-field" prefWidth="360.0" />
+                                    </children>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="top-control-group">
+                                    <children>
+                                        <Label text="Category" styleClass="top-control-label" />
+                                        <ComboBox fx:id="inventoryCategoryComboBox" onAction="#handleInventoryCategorySelect" promptText="All Categories" prefWidth="190.0" styleClass="top-control-field" />
+                                    </children>
+                                </VBox>
+                                <Button fx:id="inventoryClearFilterBtn" onAction="#handleInventoryClearFilters" text="Clear Filters" visible="false" styleClass="top-nav-button top-nav-button-ghost" />
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            </top>
+
+            <left>
+                <VBox prefWidth="210.0" alignment="TOP_LEFT" styleClass="admin-sidebar admin-sidebar-compact" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox spacing="8.0" style="-fx-padding: 8 12 12 12;">
+                            <children>
+                                <Button fx:id="menuBtn" id="menuBtn" onAction="#switchForm" maxWidth="Infinity" text="Catalog" styleClass="sidebar-button-active" />
+                                <Button fx:id="dashboardBtn" id="dashboardBtn" onAction="#switchForm" maxWidth="Infinity" text="Book Dashboard" styleClass="sidebar-button" />
+                                <Button fx:id="inventoryBtn" id="inventoryBtn" onAction="#switchForm" maxWidth="Infinity" text="Book Inventory" styleClass="sidebar-button" />
+                                <Button fx:id="customersBtn" id="customersBtn" onAction="#switchForm" maxWidth="Infinity" text="Readers" styleClass="sidebar-button" />
+                            </children>
+                        </VBox>
+
+                        <VBox VBox.vgrow="ALWAYS" />
+
+                        <VBox spacing="10.0" style="-fx-padding: 0 16 18 16;">
+                            <children>
+                                <Button onAction="#handleLogout" text="Sign Out" maxWidth="Infinity" styleClass="signout-button" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+
+            <center>
+                <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                    <content>
+                        <VBox spacing="10.0" style="-fx-padding: 8 20 16 20;">
+                            <children>
+                                <VBox spacing="14.0" styleClass="surface-card shelf-surface" prefHeight="560.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Label fx:id="inventorySectionTitle" text="Browse Catalog" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #183b56;" />
+                                                <Label text="Live catalog cards" style="-fx-text-fill: #6b7c93;" />
+                                            </children>
+                                        </HBox>
+                                        <ScrollPane fx:id="inventoryBooksScrollPane" fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                                            <content>
+                                                <FlowPane fx:id="inventoryBooksGrid" hgap="22.0" vgap="22.0" style="-fx-padding: 4;" prefWrapLength="980.0" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

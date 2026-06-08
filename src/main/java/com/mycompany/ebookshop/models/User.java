@@ -11,10 +11,10 @@ public class User {
     private final StringProperty address = new SimpleStringProperty();
     private final StringProperty phone = new SimpleStringProperty();
     private final StringProperty role = new SimpleStringProperty();
-    
+
     public User() {}
-    
-    public User(int id, String username, String email, String password, 
+
+    public User(int id, String username, String email, String password,
                 String fullName, String address, String phone, String role) {
         this.id.set(id);
         this.username.set(username);
@@ -25,8 +25,7 @@ public class User {
         this.phone.set(phone);
         this.role.set(role);
     }
-    
-    // Getters
+
     public int getId() { return id.get(); }
     public String getUsername() { return username.get(); }
     public String getEmail() { return email.get(); }
@@ -35,8 +34,7 @@ public class User {
     public String getAddress() { return address.get(); }
     public String getPhone() { return phone.get(); }
     public String getRole() { return role.get(); }
-    
-    // Setters
+
     public void setId(int id) { this.id.set(id); }
     public void setUsername(String username) { this.username.set(username); }
     public void setEmail(String email) { this.email.set(email); }
@@ -45,8 +43,7 @@ public class User {
     public void setAddress(String address) { this.address.set(address); }
     public void setPhone(String phone) { this.phone.set(phone); }
     public void setRole(String role) { this.role.set(role); }
-    
-    // Property getters
+
     public IntegerProperty idProperty() { return id; }
     public StringProperty usernameProperty() { return username; }
     public StringProperty emailProperty() { return email; }

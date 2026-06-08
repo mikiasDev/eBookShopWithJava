@@ -11,6 +11,9 @@ public class Order {
     private final ObjectProperty<LocalDateTime> orderDate = new SimpleObjectProperty<>();
     private final DoubleProperty totalAmount = new SimpleDoubleProperty();
     private final StringProperty status = new SimpleStringProperty();
+    private final StringProperty receiptPath = new SimpleStringProperty();
+    private final StringProperty shippingAddress = new SimpleStringProperty();
+    private final StringProperty paymentMethod = new SimpleStringProperty();
     private List<OrderItem> items = new ArrayList<>();
     
     public Order() {}
@@ -23,7 +26,7 @@ public class Order {
         this.status.set(status);
     }
     
-    // Getters and Setters
+    
     public int getId() { return id.get(); }
     public void setId(int id) { this.id.set(id); }
     public int getUserId() { return userId.get(); }
@@ -36,4 +39,11 @@ public class Order {
     public void setStatus(String status) { this.status.set(status); }
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
+    public String getReceiptPath() { return receiptPath.get(); }
+    public void setReceiptPath(String path) { this.receiptPath.set(path); }
+    public StringProperty receiptPathProperty() { return receiptPath; }
+    public String getShippingAddress() { return shippingAddress.get(); }
+    public void setShippingAddress(String address) { this.shippingAddress.set(address); }
+    public String getPaymentMethod() { return paymentMethod.get(); }
+    public void setPaymentMethod(String method) { this.paymentMethod.set(method); }
 }

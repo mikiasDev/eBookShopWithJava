@@ -1,0 +1,13 @@
+# Example OAuth properties for eBookShop
+# Copy this file to %USERPROFILE%\.ebookshop\oauth.properties (Windows)
+# or ~/.ebookshop/oauth.properties (Unix) and populate the values.
+
+# Keys expected by GoogleOAuthService.readConfig():
+GOOGLE_OAUTH_CLIENT_ID=
+GOOGLE_OAUTH_CLIENT_SECRET=
+
+# Optional local-file aliases also supported by the app:
+# google.oauth.clientId=
+# google.oauth.clientSecret=
+
+# Do NOT commit your real client secret into source control.
